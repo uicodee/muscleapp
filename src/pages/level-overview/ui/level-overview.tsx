@@ -10,7 +10,7 @@ import {Label} from "@/shared/ui/label.tsx";
 import {useState} from "react";
 
 export const LevelOverview = () => {
-    const [option, setOption] = useState("hands")
+    const [option, setOption] = useState<string>("hands")
     return (
         <div className="flex flex-col h-full w-full pt-5 pb-10">
             <div className="flex flex-col w-full">
