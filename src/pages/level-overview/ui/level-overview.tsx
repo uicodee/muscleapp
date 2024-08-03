@@ -39,7 +39,7 @@ export const LevelOverview = () => {
                 <p className="flex text-center">243 $MUSCLE до следущего уровня</p>
             </div>
             <div className="mb-4">
-                <RadioGroup defaultValue={option} className="flex justify-center" onValueChange={(value) => setOption(value)}>
+                <RadioGroup defaultValue={option} className="flex justify-center" onValueChange={(value: string) => setOption(value)}>
                     <div>
                         <RadioGroupItem value="hands" id="hands" className="peer sr-only"/>
                         <Label
