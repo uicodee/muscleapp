@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="theme-color" content="#000000"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Unbounded:wght@200..900&display=swap"
+          rel="stylesheet">
+    <title>Telegram Mini App</title>
+     <style>
+         root, html, body, #root {
+            background-color: #EFEFF4;
+        }
+        .mobile-body {
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .mobile-wrap {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background-color: #EFEFF4;
+        }
+
+        .mobile-content {
+            height: calc(100% + 1px);
+            background-color: #EFEFF4;
+        }
+    </style>
+</head>
+<body class="mobile-body">
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="wrap" class="mobile-wrap">
+    <div id="content" class="mobile-content">
+        <div id="root"></div>
+    </div>
+</div>
+<script src="/src/app/main.tsx" type="module"></script>
+</body>
+</html>
