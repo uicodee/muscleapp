@@ -20,16 +20,19 @@ export const HomePage = () => {
         queryFn: () => UserService.getUser(initDataRaw)
     })
     return (
-        <div className="flex flex-col w-full pt-5">
+        <div className="flex flex-col w-full pt-5 xs:pt-2">
             <div className="flex flex-col w-full">
-                <div className="flex w-full justify-between mb-4">
+                <div className="flex w-full justify-between mb-4 xs:mb-2">
                     <BalanceCard balance={user?.data.balance.points}/>
                     <Button size="icon" variant="icon" asChild><Link to="/settings"><SettingsIcon/></Link></Button>
                 </div>
                 <div className="grid grid-cols-3 gap-x-1 text-white text-base z-10">
-                    <Button variant="chip" size="chip">Руки {hero?.data.handLevel} lvl</Button>
-                    <Button variant="chip" size="chip">Спина {hero?.data.backLevel} lvl</Button>
-                    <Button variant="chip" size="chip">Ноги {hero?.data.legLevel} lvl</Button>
+                    <Button className="px-4 py-3 xs:px-1 xs:py-1 xs:text-sm" variant="chip"
+                            size="chip">Руки {hero?.data.handLevel} lvl</Button>
+                    <Button className="px-4 py-3 xs:px-1 xs:py-1 xs:text-sm" variant="chip"
+                            size="chip">Спина {hero?.data.backLevel} lvl</Button>
+                    <Button className="px-4 py-3 xs:px-1 xs:py-1 xs:text-sm" variant="chip"
+                            size="chip">Ноги {hero?.data.legLevel} lvl</Button>
                 </div>
             </div>
             <div className="flex relative h-full">
@@ -47,15 +50,15 @@ export const HomePage = () => {
                 </div>
             </div>
             <div className="mt-auto">
-                <div className="flex w-full flex-col gap-y-4 text-lg">
-                    <Button className="w-full font-bold gap-x-2">
+                <div className="flex w-full flex-col gap-y-4 xs:gap-y-2 text-lg">
+                    <Button className="w-full font-bold gap-x-2 px-4 py-3 xs:text-sm xs:py-2">
                         Начать фарминг
                         <LockIcon/>
                     </Button>
-                    <Button variant="orange" className="font-bold gap-x-2">
+                    <Button variant="orange" className="font-bold gap-x-2 px-4 py-3 xs:text-sm xs:py-2">
                         Boost-game
                         <div
-                            className="bg-primary-blue px-2.5 py-2 rounded-full text-sm font-normal rotate-8">soon</div>
+                            className="bg-primary-blue px-2.5 py-2 xs:text-xs xs:px-2 xs:py-1 rounded-full text-sm font-normal rotate-8">soon</div>
                     </Button>
                 </div>
             </div>

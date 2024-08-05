@@ -17,6 +17,10 @@ module.exports = {
             },
         },
         extend: {
+            screens: {
+                "sm": "540px",
+                "xs": "400px"
+            },
             fontFamily: {
                 unbounded: ['Unbounded', 'sans-serif'],
                 inter: ['Inter', 'sans-serif'],

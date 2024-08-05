@@ -7,14 +7,17 @@ import skeleton from "@/assets/skeleton.png";
 import skeletonBack from "@/assets/back.png";
 import { RadioGroup, RadioGroupItem } from "@/shared/ui/radio-group.tsx";
 import { Label } from "@/shared/ui/label.tsx";
-import { useQuery } from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import UserService from "@/shared/api/service/user.ts";
 import { retrieveLaunchParams, useHapticFeedback } from "@telegram-apps/sdk-react";
 import HeroService from "@/shared/api/service/hero.ts";
+import EntityService from "@/shared/api/service/entity.ts";
 
 export const LevelOverview = () => {
     const haptic = useHapticFeedback();
     const { initDataRaw } = retrieveLaunchParams();
+    const [option, setOption] = useState<string>("hand");
+    const queryClient = useQueryClient()
     const { data: user } = useQuery({
         queryKey: ["user"],
         queryFn: () => UserService.getUser(initDataRaw)
@@ -23,8 +26,17 @@ export const LevelOverview = () => {
         queryKey: ["hero"],
         queryFn: () => HeroService.getHero(initDataRaw)
     });
+    const { data: entity } = useQuery({
+        queryKey: ["entity"],
+        queryFn: () => EntityService.getNextLevel(initDataRaw, option)
+    });
+    const mutation = useMutation({
+        mutationFn: () => EntityService.upgradeLevel(initDataRaw, option),
+        onSuccess: () => {
+            void queryClient.invalidateQueries({queryKey: ["user", "hero", "entity"]})
+        }
+    })
 
-    const [option, setOption] = useState<string>("hands");
     const [preloadedImages, setPreloadedImages] = useState<{ [key: string]: string }>({});
 
     useEffect(() => {
@@ -61,7 +73,7 @@ export const LevelOverview = () => {
             </div>
             <div className="flex relative h-full">
                 <div className="flex h-full items-center justify-center w-full aspect-square transition-all duration-200">
-                    {option === "hands" && preloadedImages.skeleton && (
+                    {option === "hand" && preloadedImages.skeleton && (
                         <>
                             <img src={preloadedImages.skeleton} alt="" className="w-[285px]" />
                             <div className="bg-primary-blue p-2.5 absolute -translate-y-[120px] text-xs text-white rounded-full translate-x-20">
@@ -71,7 +83,7 @@ export const LevelOverview = () => {
                             <div className=" -translate-x-20 border-2 border-primary-blue w-[95px] h-[179px] absolute rounded-3xl bg-[#1877F2]/10"></div>
                         </>
                     )}
-                    {option === "legs" && preloadedImages.skeleton && (
+                    {option === "leg" && preloadedImages.skeleton && (
                         <>
                             <img src={preloadedImages.skeleton} alt="" className="w-[285px]" />
                             <div className="bg-primary-blue p-2.5 absolute -translate-y-2 text-xs text-white rounded-full">
@@ -92,7 +104,7 @@ export const LevelOverview = () => {
                 </div>
             </div>
             <div className="flex justify-center text-white text-center bg-primary-blue p-2.5 rounded-full text-xs mb-1 mt-3">
-                <p className="flex text-center">243 $MUSCLE до следущего уровня</p>
+                <p className="flex text-center">{entity?.data.price} $MUSCLE до следущего уровня</p>
             </div>
             <div className="mb-4">
                 <RadioGroup
@@ -101,21 +113,22 @@ export const LevelOverview = () => {
                     onValueChange={(value: string) => {
                         haptic.impactOccurred("soft");
                         setOption(value);
+                        void queryClient.invalidateQueries({queryKey: ["entity"]})
                     }}
                 >
                     <div>
-                        <RadioGroupItem value="hands" id="hands" className="peer sr-only" />
+                        <RadioGroupItem value="hand" id="hand" className="peer sr-only" />
                         <Label
-                            htmlFor="hands"
+                            htmlFor="hand"
                             className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
                         >
                             Руки
                         </Label>
                     </div>
                     <div>
-                        <RadioGroupItem value="legs" id="legs" className="peer sr-only" />
+                        <RadioGroupItem value="leg" id="leg" className="peer sr-only" />
                         <Label
-                            htmlFor="legs"
+                            htmlFor="leg"
                             className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
                         >
                             Ноги
@@ -133,7 +146,7 @@ export const LevelOverview = () => {
                 </RadioGroup>
             </div>
             <div className="flex w-full">
-                <Button variant="orange" className="w-full font-bold gap-x-2">
+                <Button variant="orange" className="w-full font-bold gap-x-2" onClick={() => mutation.mutate()}>
                     Прокачать
                 </Button>
             </div>

@@ -20,6 +20,8 @@ export const App: FC = () => {
         miniApp.setHeaderColor('#ffffff');
         viewport?.expand();
         closingBehavior.enableConfirmation();
+        console.log(viewport?.width)
+        console.log(viewport?.height)
     }, [miniApp, viewport, closingBehavior]);
 
     return <RouterProvider router={router}></RouterProvider>;
