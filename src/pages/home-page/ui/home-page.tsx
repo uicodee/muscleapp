@@ -24,7 +24,7 @@ export const HomePage = () => {
             <div className="flex flex-col w-full">
                 <div className="flex w-full justify-between mb-4">
                     <BalanceCard balance={user?.data.balance.points}/>
-                    <Button size="icon" variant="icon" asChild><Link to="/claim"><SettingsIcon/></Link></Button>
+                    <Button size="icon" variant="icon" asChild><Link to="/settings"><SettingsIcon/></Link></Button>
                 </div>
                 <div className="grid grid-cols-3 gap-x-1 text-white text-base z-10">
                     <Button variant="chip" size="chip">Руки {hero?.data.handLevel} lvl</Button>
