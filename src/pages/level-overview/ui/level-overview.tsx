@@ -48,7 +48,7 @@ export const LevelOverview = () => {
     }, []);
 
     return (
-        <div className="flex flex-col w-full pt-5 pb-10">
+        <div className="flex flex-col w-full pt-5">
             <div className="flex flex-col w-full">
                 <div className="flex w-full justify-between mb-4">
                     <BalanceCard balance={user?.data.balance.points} />
