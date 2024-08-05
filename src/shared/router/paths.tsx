@@ -39,6 +39,11 @@ const SettingsOverview = lazy(() =>
         default: module.SettingsOverview,
     })),
 );
+const ClaimOverview = lazy(() =>
+    import("@/pages/claim-overview").then((module) => ({
+        default: module.ClaimOverview,
+    })),
+);
 
 
 export const paths = [
@@ -68,15 +73,19 @@ export const paths = [
                     },
                     {
                         path: "settings",
-                        element: <SettingsOverview />
+                        element: <SettingsOverview/>
                     }
-                ]
+                ],
             },
+            {
+                path: "claim",
+                element: <ClaimOverview/>
+            }
         ],
 
     },
     {
         path: "/welcome",
         element: <WelcomePage/>
-    }
+    },
 ];

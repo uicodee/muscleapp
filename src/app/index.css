@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/** {*/
-/*    @apply font-unbounded*/
-/*}*/
 
 @layer base {
   :root {
@@ -63,15 +60,6 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
 
 body {
     font-family: 'Unbounded', sans-serif!important;
@@ -79,27 +67,17 @@ body {
     padding: 0;
 }
 
-.no-hover:hover {
-    background: unset !important;
-    color: unset !important;
-    -webkit-tap-highlight-color: transparent !important;
-    opacity: 100 !important;
+.fade-enter {
+    opacity: 0;
 }
-
-.wrapper--opacity:hover,
-.wrapper--ios:hover {
-    opacity: 100 !important;
-    background: unset !important;
-    color: unset !important;
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity 0.5s;
 }
-
-.wrapper--opacity:active,
-.wrapper--ios:active {
-    opacity: 100 !important;
-    background: unset !important;
-    color: unset !important;
+.fade-exit {
+    opacity: 1;
 }
-
-.font-custom {
-  font-family: 'Unbounded', sans-serif!important;
+.fade-exit-active {
+    opacity: 0;
+    transition: opacity 0.5s;
 }

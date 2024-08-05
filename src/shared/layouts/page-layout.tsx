@@ -5,7 +5,7 @@ import {Suspense} from "react";
 export const PageLayout = () => {
     return (
         <Suspense fallback={
-            <div className="flex h-lvh max-h-lvh justify-center items-center bg-primary-bg">
+            <div className="flex h-lvh justify-center items-center">
                 <Spinner size="m"/>
             </div>
         }>

@@ -1,47 +1,110 @@
-import {BalanceCard} from "@/shared/ui/balance-card.tsx";
-import {Button} from "@/shared/ui/button.tsx";
-import {Link} from "react-router-dom";
-import {QuestionIcon} from "@/assets/icons/question.tsx";
-import skeletHand from "@/assets/skelet-hand.svg";
-import skeletLeg from "@/assets/skelet-leg.svg";
-import skeletBack from "@/assets/skelet-back.svg";
-import {RadioGroup, RadioGroupItem} from "@/shared/ui/radio-group.tsx";
-import {Label} from "@/shared/ui/label.tsx";
-import {useState} from "react";
+import { useState, useEffect } from "react";
+import { BalanceCard } from "@/shared/ui/balance-card.tsx";
+import { Button } from "@/shared/ui/button.tsx";
+import { Link } from "react-router-dom";
+import { QuestionIcon } from "@/assets/icons/question.tsx";
+import skeleton from "@/assets/skeleton.png";
+import skeletonBack from "@/assets/back.png";
+import { RadioGroup, RadioGroupItem } from "@/shared/ui/radio-group.tsx";
+import { Label } from "@/shared/ui/label.tsx";
+import { useQuery } from "@tanstack/react-query";
+import UserService from "@/shared/api/service/user.ts";
+import { retrieveLaunchParams, useHapticFeedback } from "@telegram-apps/sdk-react";
+import HeroService from "@/shared/api/service/hero.ts";
 
 export const LevelOverview = () => {
-    const [option, setOption] = useState<string>("hands")
+    const haptic = useHapticFeedback();
+    const { initDataRaw } = retrieveLaunchParams();
+    const { data: user } = useQuery({
+        queryKey: ["user"],
+        queryFn: () => UserService.getUser(initDataRaw)
+    });
+    const { data: hero } = useQuery({
+        queryKey: ["hero"],
+        queryFn: () => HeroService.getHero(initDataRaw)
+    });
+
+    const [option, setOption] = useState<string>("hands");
+    const [preloadedImages, setPreloadedImages] = useState<{ [key: string]: string }>({});
+
+    useEffect(() => {
+        const images = {
+            skeleton: skeleton,
+            skeletonBack: skeletonBack,
+        };
+        const loadImages = async () => {
+            const promises = Object.entries(images).map(([key, src]) =>
+                new Promise<HTMLImageElement>((resolve, reject) => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = () => resolve(img);
+                    img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
+                }).then((img) => ({ [key]: img.src }))
+            );
+            const loadedImages = await Promise.all(promises);
+            setPreloadedImages(Object.assign({}, ...loadedImages));
+        };
+        loadImages();
+    }, []);
+
     return (
-        <div className="flex flex-col h-full w-full pt-5 pb-10">
+        <div className="flex flex-col w-full pt-5 pb-10">
             <div className="flex flex-col w-full">
                 <div className="flex w-full justify-between mb-4">
-                    <BalanceCard balance={1232.44}/>
-                    <Button size="icon" variant="icon" asChild><Link to="/settings"><QuestionIcon/></Link></Button>
+                    <BalanceCard balance={user?.data.balance.points} />
+                    <Button size="icon" variant="icon" asChild>
+                        <Link to="/settings">
+                            <QuestionIcon />
+                        </Link>
+                    </Button>
                 </div>
             </div>
             <div className="flex relative h-full">
-                <div className="flex h-full items-center justify-center w-full aspect-square">
-                    <div
-                        className="absolute inset-0 flex items-center justify-center rounded-full bg-white/30 ring-4 ring-white/30">
-                        <div
-                            className="flex items-center justify-center w-10/12 aspect-square bg-white/35 rounded-full ring-4 ring-white/35">
-                            <div
-                                className="flex items-center justify-center w-10/12 aspect-square bg-white rounded-full ring-4 ring-white">
-                                {option === "hands" && <img src={skeletHand} alt=""/>}
-                                {option === "legs" && <img src={skeletLeg} alt=""/>}
-                                {option === "back" && <img src={skeletBack} alt=""/>}
+                <div className="flex h-full items-center justify-center w-full aspect-square transition-all duration-200">
+                    {option === "hands" && preloadedImages.skeleton && (
+                        <>
+                            <img src={preloadedImages.skeleton} alt="" className="w-[285px]" />
+                            <div className="bg-primary-blue p-2.5 absolute -translate-y-[120px] text-xs text-white rounded-full translate-x-20">
+                                Руки {hero?.data.handLevel} lvl
                             </div>
-                        </div>
-                    </div>
+                            <div className="-translate-y-4 translate-x-20 border-2 border-primary-blue w-[95px] h-[164px] absolute rounded-3xl bg-[#1877F2]/10"></div>
+                            <div className=" -translate-x-20 border-2 border-primary-blue w-[95px] h-[179px] absolute rounded-3xl bg-[#1877F2]/10"></div>
+                        </>
+                    )}
+                    {option === "legs" && preloadedImages.skeleton && (
+                        <>
+                            <img src={preloadedImages.skeleton} alt="" className="w-[285px]" />
+                            <div className="bg-primary-blue p-2.5 absolute -translate-y-2 text-xs text-white rounded-full">
+                                Ноги {hero?.data.legLevel} lvl
+                            </div>
+                            <div className="translate-y-24 border-2 border-primary-blue w-[150px] h-[165px] absolute rounded-3xl bg-[#1877F2]/10"></div>
+                        </>
+                    )}
+                    {option === "back" && preloadedImages.skeletonBack && (
+                        <>
+                            <img src={preloadedImages.skeletonBack} alt="" className="w-[320px] h-[320px]" />
+                            <div className="bg-primary-blue p-2.5 absolute -translate-y-24 text-xs text-white rounded-full">
+                                Спина {hero?.data.backLevel} lvl
+                            </div>
+                            <div className="translate-y-10 border-2 border-primary-blue w-[95px] h-[230px] absolute rounded-3xl bg-[#1877F2]/10"></div>
+                        </>
+                    )}
                 </div>
             </div>
             <div className="flex justify-center text-white text-center bg-primary-blue p-2.5 rounded-full text-xs mb-1 mt-3">
                 <p className="flex text-center">243 $MUSCLE до следущего уровня</p>
             </div>
             <div className="mb-4">
-                <RadioGroup defaultValue={option} className="flex justify-center" onValueChange={(value: string) => setOption(value)}>
+                <RadioGroup
+                    defaultValue={option}
+                    className="flex justify-center"
+                    onValueChange={(value: string) => {
+                        haptic.impactOccurred("soft");
+                        setOption(value);
+                    }}
+                >
                     <div>
-                        <RadioGroupItem value="hands" id="hands" className="peer sr-only"/>
+                        <RadioGroupItem value="hands" id="hands" className="peer sr-only" />
                         <Label
                             htmlFor="hands"
                             className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
@@ -50,7 +113,7 @@ export const LevelOverview = () => {
                         </Label>
                     </div>
                     <div>
-                        <RadioGroupItem value="legs" id="legs" className="peer sr-only"/>
+                        <RadioGroupItem value="legs" id="legs" className="peer sr-only" />
                         <Label
                             htmlFor="legs"
                             className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
@@ -59,7 +122,7 @@ export const LevelOverview = () => {
                         </Label>
                     </div>
                     <div>
-                        <RadioGroupItem value="back" id="back" className="peer sr-only"/>
+                        <RadioGroupItem value="back" id="back" className="peer sr-only" />
                         <Label
                             htmlFor="back"
                             className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary-blue"
@@ -67,7 +130,6 @@ export const LevelOverview = () => {
                             Спина
                         </Label>
                     </div>
-
                 </RadioGroup>
             </div>
             <div className="flex w-full">
@@ -76,5 +138,5 @@ export const LevelOverview = () => {
                 </Button>
             </div>
         </div>
-    )
-}
+    );
+};

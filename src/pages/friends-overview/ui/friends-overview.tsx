@@ -21,6 +21,18 @@ export const FriendsOverview = () => {
                     {
                         fullName: "Jason Stateham",
                         tokens: 99000
+                    },
+                    {
+                        fullName: "Robert Downey JR",
+                        tokens: 99000
+                    },
+                    {
+                        fullName: "Hamster User",
+                        tokens: 199000
+                    },
+                    {
+                        fullName: "Combatter",
+                        tokens: 19900089
                     }
                 ]}
             />

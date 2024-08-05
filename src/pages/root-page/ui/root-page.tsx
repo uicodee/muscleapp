@@ -7,8 +7,8 @@ export const RootPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     return (
-        <div style={{display: 'flex', flexDirection: 'column', height: '100vh'}}>
-            <div style={{flex: 1, overflowY: 'auto', paddingBottom: '100px'}} className="px-4">
+        <div className="flex flex-col h-dvh">
+            <div className="flex-1 overflow-y-auto px-4 pb-24">
                 <Suspense fallback={
                     <div className="flex h-full justify-center items-center">
                         <Spinner size="m"/>
@@ -17,14 +17,7 @@ export const RootPage = () => {
                     <Outlet/>
                 </Suspense>
             </div>
-            <Tabbar style={{
-                position: 'fixed',
-                bottom: 0,
-                width: '100%',
-                zIndex: 1000,
-                background: "white",
-                border: "0.5px solid #ccc"
-            }}>
+            <Tabbar className="flex fixed bottom-0 w-full z-10 bg-white border-t">
                 {tabs.map((tab, index) => (
                     <Tabbar.Item
                         key={index}
@@ -32,10 +25,7 @@ export const RootPage = () => {
                         text={tab.title}
                         selected={location.pathname === tab.href}
                         onClick={() => navigate(tab.href)}
-                        style={{
-                            paddingRight: "8px",
-                            paddingLeft: "8px",
-                        }}
+                        className="px-2"
                     >
                         {tab.icon}
                     </Tabbar.Item>

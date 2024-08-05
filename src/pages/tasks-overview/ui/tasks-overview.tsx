@@ -9,37 +9,41 @@ export const TasksOverview = () => {
             price: '2 000',
         },
         {
-            title: 'Подпишитесь на MuscleCare в Telegram',
+            title: 'Подпишитесь на FitnessLife в Instagram',
+            price: '3 000',
+        },
+        {
+            title: 'Посмотрите видео на YouTube канале MuscleCare',
+            price: '1 500',
+        },
+        {
+            title: 'Подпишитесь на рассылку MuscleCare',
+            price: '1 000',
+        },
+        {
+            title: 'Оставьте отзыв на сайте MuscleCare',
+            price: '2 500',
+        },
+        {
+            title: 'Сделайте репост записи MuscleCare в Facebook',
             price: '2 000',
         },
         {
-            title: 'Подпишитесь на MuscleCare в Telegram',
-            price: '2 000',
+            title: 'Заполните анкету на сайте MuscleCare',
+            price: '1 200',
         },
         {
-            title: 'Подпишитесь на MuscleCare в Telegram',
-            price: '2 000',
+            title: 'Пригласите друга в группу MuscleCare в Telegram',
+            price: '3 000',
         },
         {
-            title: 'Подпишитесь на MuscleCare в Telegram',
-            price: '2 000',
+            title: 'Поставьте лайк на пост в Instagram MuscleCare',
+            price: '500',
         },
         {
-            title: 'Подпишитесь на MuscleCare в Telegram',
-            price: '2 000',
-        },
-        {
-            title: 'Подпишитесь на MuscleCare в Telegram',
-            price: '2 000',
-        },
-        {
-            title: 'Подпишитесь на MuscleCare в Telegram',
-            price: '2 000',
-        },
-        {
-            title: 'Подпишитесь на MuscleCare в Telegram',
-            price: '2 000',
-        },
+            title: 'Напишите комментарий к видео на YouTube MuscleCare',
+            price: '800',
+        }
     ];
 
     return (
