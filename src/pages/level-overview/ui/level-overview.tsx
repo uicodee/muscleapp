@@ -122,14 +122,16 @@ export const LevelOverview = () => {
           )}
         </div>
       </div>
-      <div className="flex justify-center text-white text-center bg-primary-blue p-2.5 xs:p-2 rounded-full text-xs mb-1 mt-3">
-        <p className="flex text-center">
-          {entity?.data !== null && isLoading !== true
-            ? `${entity?.data.price} $MUSCLE до следующего уровня`
-            : "Максимальный уровень"}
-        </p>
+      <div className="flex justify-center">
+        <div className="flex w-80 xs:w-60 justify-center text-white text-center bg-primary-blue p-2.5 xs:p-2 rounded-full text-xs mb-1 mt-3 xs:mt-1">
+          <p className="flex text-center">
+            {entity?.data !== null && isLoading !== true
+              ? `${entity?.data.price} $MUSCLE до следующего уровня`
+              : "Максимальный уровень"}
+          </p>
+        </div>
       </div>
-      <div className="mb-4">
+      <div className="mb-4 xs:mb-2">
         <RadioGroup
           defaultValue={option}
           className="flex justify-center"
@@ -170,7 +172,7 @@ export const LevelOverview = () => {
       <div className="flex w-full">
         <Button
           variant="orange"
-          className="w-full font-bold gap-x-2"
+          className="w-full font-bold gap-x-2 px-4 py-3 xs:text-sm xs:py-2"
           onClick={() => mutation.mutate()}
         >
           Прокачать
