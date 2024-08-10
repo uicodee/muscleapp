@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { BalanceCard } from "@/shared/ui/balance-card.tsx";
 import { Button } from "@/shared/ui/button.tsx";
-import { Link } from "react-router-dom";
-import { QuestionIcon } from "@/assets/icons/question.tsx";
 import skeleton from "@/assets/skeleton.png";
 import skeletonBack from "@/assets/back.png";
 import { RadioGroup, RadioGroupItem } from "@/shared/ui/radio-group.tsx";
@@ -36,9 +34,15 @@ export const LevelOverview = () => {
   const mutation = useMutation({
     mutationFn: () => EntityService.upgradeLevel(initDataRaw, option),
     onSuccess: () => {
-      void queryClient.invalidateQueries({
-        queryKey: ["user", "hero", "entity"],
-      });
+      queryClient
+        .invalidateQueries({
+          queryKey: ["user"],
+        })
+        .then(() => {
+          queryClient.invalidateQueries({ queryKey: ["hero"] }).then(() => {
+            queryClient.invalidateQueries({ queryKey: ["entity"] });
+          });
+        });
     },
   });
 
@@ -67,31 +71,31 @@ export const LevelOverview = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-full pt-5 xs:pt-2">
+    <div className="flex flex-col w-full min-h-full pt-5 xs:pt-2">
       <div className="flex flex-col w-full">
-        <div className="flex w-full justify-between mb-4 xs:mb-2">
+        <div className="flex w-full justify-between mb-4 xs:mb-3">
           <BalanceCard balance={user?.data.balance.points} />
-          <Button size="icon" variant="icon" asChild>
+          {/* <Button size="icon" variant="icon" asChild>
             <Link to="/settings">
               <QuestionIcon />
             </Link>
-          </Button>
+          </Button> */}
         </div>
       </div>
       <div className="flex relative h-full">
-        <div className="flex h-full items-center justify-center w-full aspect-square transition-all duration-200">
+        <div className="flex h-full items-center justify-center w-full transition-all duration-200">
           {option === "hand" && preloadedImages.skeleton && (
             <>
               <img
                 src={preloadedImages.skeleton}
                 alt=""
-                className="w-[285px]"
+                className="w-[285px] xs:w-[250px]"
               />
               <div className="bg-primary-blue p-2.5 absolute -translate-y-[120px] text-xs text-white rounded-full translate-x-20">
                 Руки {hero?.data.handLevel} lvl
               </div>
-              <div className="-translate-y-4 translate-x-20 border-2 border-primary-blue w-[95px] h-[164px] absolute rounded-3xl bg-[#1877F2]/10"></div>
-              <div className=" -translate-x-20 border-2 border-primary-blue w-[95px] h-[179px] absolute rounded-3xl bg-[#1877F2]/10"></div>
+              <div className="-translate-y-4 translate-x-20 border-2 border-primary-blue w-[95px] xs:w-[65px] h-[164px] xs:h-[144px] absolute rounded-3xl bg-[#1877F2]/10"></div>
+              <div className=" -translate-x-20 xs:-translate-x-16 border-2 border-primary-blue w-[95px] xs:w-[65px] h-[179px] xs:h-[159px] absolute rounded-3xl bg-[#1877F2]/10"></div>
             </>
           )}
           {option === "leg" && preloadedImages.skeleton && (
@@ -99,12 +103,12 @@ export const LevelOverview = () => {
               <img
                 src={preloadedImages.skeleton}
                 alt=""
-                className="w-[285px]"
+                className="w-[285px] xs:w-[250px]"
               />
               <div className="bg-primary-blue p-2.5 absolute -translate-y-2 text-xs text-white rounded-full">
                 Ноги {hero?.data.legLevel} lvl
               </div>
-              <div className="translate-y-24 border-2 border-primary-blue w-[150px] h-[165px] absolute rounded-3xl bg-[#1877F2]/10"></div>
+              <div className="translate-y-24 xs:translate-y-20 border-2 border-primary-blue w-[150px] h-[165px] xs:w-[130px] xs:h-[145px] absolute rounded-3xl bg-[#1877F2]/10"></div>
             </>
           )}
           {option === "back" && preloadedImages.skeletonBack && (
@@ -112,7 +116,7 @@ export const LevelOverview = () => {
               <img
                 src={preloadedImages.skeletonBack}
                 alt=""
-                className="w-[320px] h-[320px]"
+                className="w-[320px] h-[320px] xs:w-[260px] xs:h-[260px]"
               />
               <div className="bg-primary-blue p-2.5 absolute -translate-y-24 text-xs text-white rounded-full">
                 Спина {hero?.data.backLevel} lvl
@@ -122,61 +126,64 @@ export const LevelOverview = () => {
           )}
         </div>
       </div>
-      <div className="flex justify-center">
-        <div className="flex w-80 xs:w-60 justify-center text-white text-center bg-primary-blue p-2.5 xs:p-2 rounded-full text-xs mb-1 mt-3 xs:mt-1">
-          <p className="flex text-center">
-            {entity?.data !== null && isLoading !== true
-              ? `${entity?.data.price} $MUSCLE до следующего уровня`
-              : "Максимальный уровень"}
-          </p>
+
+      <div className="mt-auto">
+        <div className="flex justify-center">
+          <div className="flex w-80 xs:w-60 justify-center text-white text-center bg-primary-blue p-2.5 xs:p-2 rounded-full text-xs mb-1 mt-3 xs:mt-1">
+            <p className="flex text-center">
+              {entity?.data !== null && isLoading !== true
+                ? `${entity?.data.price} $MUSCLE до следующего уровня`
+                : "Максимальный уровень"}
+            </p>
+          </div>
         </div>
-      </div>
-      <div className="mb-4 xs:mb-2">
-        <RadioGroup
-          defaultValue={option}
-          className="flex justify-center"
-          onValueChange={(value: string) => {
-            haptic.impactOccurred("soft");
-            setOption(value);
-          }}
-        >
-          <div>
-            <RadioGroupItem value="hand" id="hand" className="peer sr-only" />
-            <Label
-              htmlFor="hand"
-              className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-1.5 xs:py-2 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
-            >
-              Руки
-            </Label>
-          </div>
-          <div>
-            <RadioGroupItem value="leg" id="leg" className="peer sr-only" />
-            <Label
-              htmlFor="leg"
-              className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-1.5 xs:py-2 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
-            >
-              Ноги
-            </Label>
-          </div>
-          <div>
-            <RadioGroupItem value="back" id="back" className="peer sr-only" />
-            <Label
-              htmlFor="back"
-              className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-1.5 xs:py-2 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary-blue"
-            >
-              Спина
-            </Label>
-          </div>
-        </RadioGroup>
-      </div>
-      <div className="flex w-full">
-        <Button
-          variant="orange"
-          className="w-full font-bold gap-x-2 px-4 py-3 xs:text-sm xs:py-2"
-          onClick={() => mutation.mutate()}
-        >
-          Прокачать
-        </Button>
+        <div className="mb-4 xs:mb-2">
+          <RadioGroup
+            defaultValue={option}
+            className="flex justify-center"
+            onValueChange={(value: string) => {
+              haptic.impactOccurred("soft");
+              setOption(value);
+            }}
+          >
+            <div>
+              <RadioGroupItem value="hand" id="hand" className="peer sr-only" />
+              <Label
+                htmlFor="hand"
+                className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-1.5 xs:py-2 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
+              >
+                Руки
+              </Label>
+            </div>
+            <div>
+              <RadioGroupItem value="leg" id="leg" className="peer sr-only" />
+              <Label
+                htmlFor="leg"
+                className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-1.5 xs:py-2 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
+              >
+                Ноги
+              </Label>
+            </div>
+            <div>
+              <RadioGroupItem value="back" id="back" className="peer sr-only" />
+              <Label
+                htmlFor="back"
+                className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-1.5 xs:py-2 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary-blue"
+              >
+                Спина
+              </Label>
+            </div>
+          </RadioGroup>
+        </div>
+        <div className="flex w-full">
+          <Button
+            variant="orange"
+            className="w-full font-bold gap-x-2 py-3 xs:text-sm xs:py-1 leading-9 xs:leading-9"
+            onClick={() => mutation.mutate()}
+          >
+            Прокачать
+          </Button>
+        </div>
       </div>
     </div>
   );

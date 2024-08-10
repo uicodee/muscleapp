@@ -17,7 +17,7 @@ export default class EntityService {
     option: string
   ): Promise<AxiosResponse> {
     return api.post(
-      `api/entities/next-level/{entityType}/upgrade?entity_type=${option}`,
+      `api/entities/next-level/${option}/upgrade`,
       {},
       { headers: { Authorization: `Bearer ${initData}` } }
     );
