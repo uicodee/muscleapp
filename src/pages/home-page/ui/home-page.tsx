@@ -42,16 +42,24 @@ export const HomePage = () => {
     mutationFn: () => FarmingService.claim(initDataRaw),
   });
 
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setSeconds((prevSeconds) => prevSeconds + 1);
+
+  //     if (farming?.data?.farmingSpeed && farming?.data?.alreadyFarmed) {
+  //       const newWidth =
+  //         (380 / farming.data.farmingSpeed) * farming.data.alreadyFarmed;
+
+  //       setWidth(newWidth);
+  //     }
+  //   }, 1000);
+
+  //   return () => clearInterval(intervalId);
+  // }, [farming]);
+
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setSeconds((prevSeconds) => prevSeconds + 1);
-
-      if (farming?.data?.farmingSpeed && farming?.data?.alreadyFarmed) {
-        const newWidth =
-          (380 / farming.data.farmingSpeed) * farming.data.alreadyFarmed;
-
-        setWidth(newWidth);
-      }
+      queryClient.invalidateQueries({ queryKey: ["farming"] });
     }, 1000);
 
     return () => clearInterval(intervalId);
