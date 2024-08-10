@@ -1,9 +1,8 @@
-export function formatTime(totalSeconds: number, elapsedSeconds: number): string {
+export function formatTime(totalSeconds: number): string {
   // Calculate remaining seconds
-  const remainingTime = totalSeconds - elapsedSeconds;
 
   // Ensure remaining time is not negative
-  const safeRemainingTime = Math.max(remainingTime, 0);
+  const safeRemainingTime = Math.max(totalSeconds, 0);
 
   // Calculate hours, minutes, and remaining seconds
   const hours = Math.floor(safeRemainingTime / 3600);
@@ -11,9 +10,9 @@ export function formatTime(totalSeconds: number, elapsedSeconds: number): string
   const remainingSeconds = Math.floor(safeRemainingTime % 60);
 
   // Format the time components with leading zeros if necessary
-  const formattedHours = String(hours).padStart(2, '0');
-  const formattedMinutes = String(minutes).padStart(2, '0');
-  const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+  const formattedHours = String(hours).padStart(2, "0");
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(remainingSeconds).padStart(2, "0");
 
   // Return the formatted string
   return `Осталось: ${formattedHours}h ${formattedMinutes}m ${formattedSeconds}s`;

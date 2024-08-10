@@ -16,7 +16,7 @@ import { LockIcon } from "@/assets/icons/lock";
 export const HomePage = () => {
   const [isExploding, setIsExploding] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(0);
-  const [seconds, setSeconds] = useState<number>(0);
+  // const [seconds, setSeconds] = useState<number>(0);
   const queryClient = useQueryClient();
 
   const { initDataRaw } = retrieveLaunchParams();
@@ -128,7 +128,7 @@ export const HomePage = () => {
         {hero?.data.handLevel !== 0 &&
           farming?.data.farmingSpeed !== farming?.data.alreadyFarmed && (
             <div className="flex w-full justify-center font-base text-primary-gray leading-9 text-center text-xs">
-              {formatTime(farming?.data.leftToClaim as number, seconds)}
+              {formatTime(farming?.data.leftToClaim as number)}
             </div>
           )}
         <div className="flex w-full flex-col gap-y-4 xs:gap-y-2 text-lg ">
