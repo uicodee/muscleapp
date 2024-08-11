@@ -143,21 +143,22 @@ export const HomePage = () => {
                 className="font-bold py-3 xs:py-1 xs:text-base xs:leading-9 leading-9"
                 onClick={() => {
                   mutation.mutate();
-                  queryClient
-                    .invalidateQueries({ queryKey: ["hero"] })
-                    .then(() => {
-                      queryClient
-                        .invalidateQueries({ queryKey: ["user"] })
-                        .then(() => {
-                          queryClient
-                            .invalidateQueries({
-                              queryKey: ["farming"],
-                            })
-                            .then(() => {
-                              navigate(`/claim/${farming?.data.alreadyFarmed}`);
-                            });
-                        });
-                    });
+                  navigate(`/claim/${farming?.data.alreadyFarmed}`);
+                  // queryClient
+                  //   .invalidateQueries({ queryKey: ["hero"] })
+                  //   .then(() => {
+                  //     queryClient
+                  //       .invalidateQueries({ queryKey: ["user"] })
+                  //       .then(() => {
+                  //         queryClient
+                  //           .invalidateQueries({
+                  //             queryKey: ["farming"],
+                  //           })
+                  //           .then(() => {
+                  //             navigate(`/claim/${farming?.data.alreadyFarmed}`);
+                  //           });
+                  //       });
+                  //   });
                 }}
               >
                 Клейм
