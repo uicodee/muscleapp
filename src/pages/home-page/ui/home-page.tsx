@@ -14,7 +14,6 @@ import { LockIcon } from "@/assets/icons/lock";
 
 export const HomePage = () => {
   const navigate = useNavigate();
-  const [isExploding, setIsExploding] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(0);
   // const [seconds, setSeconds] = useState<number>(0);
   const queryClient = useQueryClient();
