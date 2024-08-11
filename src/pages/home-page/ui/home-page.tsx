@@ -111,7 +111,9 @@ export const HomePage = () => {
           </Button>
         </div>
       </div>
-      <div className="relative flex justify-center items-center w-full h-full overflow-visible -z-10">
+
+      {/* Circle Block */}
+      <div className="flex-grow flex justify-center items-center relative w-full h-full overflow-visible -z-10">
         <div className="absolute inset-0 flex justify-center items-center">
           <div className="w-[434px] h-[434px] rounded-full bg-white/29 flex justify-center items-center">
             <div className="w-[380px] h-[380px] rounded-full bg-white/35 flex justify-center items-center">
@@ -125,6 +127,7 @@ export const HomePage = () => {
           <div className="absolute -translate-y-10 translate-x-12 w-[215px] h-[41px] rounded-[50%] bg-[#17283C] -z-10"></div>
         </div>
       </div>
+
       <div className="mt-auto">
         {hero?.data.handLevel !== 0 &&
           farming?.data.farmingSpeed !== farming?.data.alreadyFarmed && (
