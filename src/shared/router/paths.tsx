@@ -78,7 +78,7 @@ export const paths = [
                 ],
             },
             {
-                path: "claim",
+                path: "claim/:amount",
                 element: <ClaimOverview/>
             }
         ],

@@ -19,7 +19,7 @@ module.exports = {
     extend: {
       screens: {
         sm: "540px",
-        xs: "400px",
+        xs: "412px",
       },
       fontFamily: {
         unbounded: ["Unbounded", "sans-serif"],

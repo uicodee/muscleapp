@@ -1,19 +1,19 @@
 import { Button } from "@/shared/ui/button.tsx";
 import { BalanceCard } from "@/shared/ui/balance-card.tsx";
 import { SettingsIcon } from "@/assets/icons/settings.tsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
 import HeroService from "@/shared/api/service/hero.ts";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import UserService from "@/shared/api/service/user.ts";
 import FarmingService from "@/shared/api/service/farming";
-import ConfettiExplosion from "react-confetti-explosion";
 import { useEffect, useState } from "react";
 import character from "@/assets/body.png";
 import { formatTime } from "@/shared/data/helpers";
 import { LockIcon } from "@/assets/icons/lock";
 
 export const HomePage = () => {
+  const navigate = useNavigate();
   const [isExploding, setIsExploding] = useState<boolean>(false);
   const [width, setWidth] = useState<number>(0);
   // const [seconds, setSeconds] = useState<number>(0);
@@ -67,7 +67,7 @@ export const HomePage = () => {
 
   return (
     <div className="flex flex-col w-full min-h-full pt-5 xs:pt-2">
-      <div className="flex w-full justify-center">
+      {/* <div className="flex w-full justify-center">
         {isExploding && (
           <ConfettiExplosion
             particleCount={500}
@@ -77,7 +77,7 @@ export const HomePage = () => {
             onComplete={() => setIsExploding(false)}
           />
         )}
-      </div>
+      </div> */}
       <div className="flex flex-col w-full">
         <div className="flex w-full justify-between mb-4 xs:mb-2">
           <BalanceCard balance={user?.data.balance.points} />
@@ -154,7 +154,7 @@ export const HomePage = () => {
                               queryKey: ["farming"],
                             })
                             .then(() => {
-                              setIsExploding(true);
+                              navigate(`/claim/${farming?.data.alreadyFarmed}`);
                             });
                         });
                     });
