@@ -122,8 +122,12 @@ export const HomePage = () => {
         </div>
 
         <div className="relative z-10">
-          <img src={character} alt="Character" />
-          <div className="absolute -translate-y-10 translate-x-12 w-[215px] h-[41px] rounded-[50%] bg-[#17283C] -z-10"></div>
+          <img
+            src={character}
+            alt="Character"
+            className="w-[326px] h-[326px] xs:w-[280px] xs:h-[280px]"
+          />
+          <div className="absolute -translate-y-10 xs:-translate-y-[35px] translate-x-12 xs:translate-x-[60px] w-[215px] h-[41px] xs:w-[150px] rounded-[50%] bg-[#17283C] -z-10"></div>
         </div>
       </div>
 
