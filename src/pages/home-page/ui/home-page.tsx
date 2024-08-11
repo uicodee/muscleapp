@@ -122,16 +122,17 @@ export const HomePage = () => {
 
         <div className="relative z-10">
           <img src={character} alt="Character" />
+          <div className="absolute -translate-y-10 translate-x-12 w-[215px] h-[41px] rounded-[50%] bg-[#17283C] -z-10"></div>
         </div>
       </div>
       <div className="mt-auto">
         {hero?.data.handLevel !== 0 &&
           farming?.data.farmingSpeed !== farming?.data.alreadyFarmed && (
-            <div className="flex w-full justify-center font-base text-primary-gray leading-9 text-center text-xs">
+            <div className="flex w-full justify-center font-base text-primary-gray leading-6 text-center text-xs">
               {formatTime(farming?.data.leftToClaim as number)}
             </div>
           )}
-        <div className="flex w-full flex-col gap-y-4 xs:gap-y-2 text-lg ">
+        <div className="flex w-full flex-col gap-y-3 xs:gap-y-1 text-lg ">
           {hero?.data.handLevel !== 0 ? (
             farming?.data.farmingSpeed === farming?.data.alreadyFarmed ? (
               <Button
@@ -139,16 +140,19 @@ export const HomePage = () => {
                 className="font-bold py-3 xs:py-1 xs:text-base xs:leading-9 leading-9"
                 onClick={() => {
                   mutation.mutate();
-                  setIsExploding(true);
                   queryClient
                     .invalidateQueries({ queryKey: ["hero"] })
                     .then(() => {
                       queryClient
                         .invalidateQueries({ queryKey: ["user"] })
                         .then(() => {
-                          queryClient.invalidateQueries({
-                            queryKey: ["farming"],
-                          });
+                          queryClient
+                            .invalidateQueries({
+                              queryKey: ["farming"],
+                            })
+                            .then(() => {
+                              setIsExploding(true);
+                            });
                         });
                     });
                 }}

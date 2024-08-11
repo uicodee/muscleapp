@@ -121,7 +121,7 @@ export const LevelOverview = () => {
               <div className="bg-primary-blue p-2.5 absolute -translate-y-24 text-xs text-white rounded-full">
                 Спина {hero?.data.backLevel} lvl
               </div>
-              <div className="translate-y-10 border-2 border-primary-blue w-[95px] h-[230px] absolute rounded-3xl bg-[#1877F2]/10"></div>
+              <div className="translate-y-10 border-2 border-primary-blue w-[95px] h-[230px] xs:w-[80px] xs:h-[180px] absolute rounded-3xl bg-[#1877F2]/10"></div>
             </>
           )}
         </div>
@@ -150,7 +150,7 @@ export const LevelOverview = () => {
               <RadioGroupItem value="hand" id="hand" className="peer sr-only" />
               <Label
                 htmlFor="hand"
-                className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-1.5 xs:py-2 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
+                className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-2.5 xs:py-1 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
               >
                 Руки
               </Label>
@@ -159,7 +159,7 @@ export const LevelOverview = () => {
               <RadioGroupItem value="leg" id="leg" className="peer sr-only" />
               <Label
                 htmlFor="leg"
-                className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-1.5 xs:py-2 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
+                className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-2.5 xs:py-1 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
               >
                 Ноги
               </Label>
@@ -168,7 +168,7 @@ export const LevelOverview = () => {
               <RadioGroupItem value="back" id="back" className="peer sr-only" />
               <Label
                 htmlFor="back"
-                className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-1.5 xs:py-2 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary-blue"
+                className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-2.5 xs:py-1 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
               >
                 Спина
               </Label>
@@ -178,7 +178,7 @@ export const LevelOverview = () => {
         <div className="flex w-full">
           <Button
             variant="orange"
-            className="w-full font-bold gap-x-2 py-3 xs:text-sm xs:py-1 leading-9 xs:leading-9"
+            className="w-full font-bold gap-x-2 py-3 xs:py-1 xs:text-base xs:leading-9 leading-9"
             onClick={() => mutation.mutate()}
           >
             Прокачать
