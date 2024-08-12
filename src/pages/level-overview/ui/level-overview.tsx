@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BalanceCard } from "@/shared/ui/balance-card.tsx";
 import { Button } from "@/shared/ui/button.tsx";
-import skeleton from "@/assets/skeleton.png";
-import skeletonBack from "@/assets/back.png";
+// import skeleton from "@/assets/skeleton.png";
+// import skeletonBack from "@/assets/back.png";
 import { RadioGroup, RadioGroupItem } from "@/shared/ui/radio-group.tsx";
 import { Label } from "@/shared/ui/label.tsx";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -11,7 +11,7 @@ import {
   retrieveLaunchParams,
   useHapticFeedback,
 } from "@telegram-apps/sdk-react";
-import HeroService from "@/shared/api/service/hero.ts";
+// import HeroService from "@/shared/api/service/hero.ts";
 import EntityService from "@/shared/api/service/entity.ts";
 
 export const LevelOverview = () => {
@@ -23,10 +23,10 @@ export const LevelOverview = () => {
     queryKey: ["user"],
     queryFn: () => UserService.getUser(initDataRaw),
   });
-  const { data: hero } = useQuery({
-    queryKey: ["hero"],
-    queryFn: () => HeroService.getHero(initDataRaw),
-  });
+  // const { data: hero } = useQuery({
+  //   queryKey: ["hero"],
+  //   queryFn: () => HeroService.getHero(initDataRaw),
+  // });
   const { data: entity, isLoading } = useQuery({
     queryKey: ["entity", initDataRaw, option],
     queryFn: () => EntityService.getNextLevel(initDataRaw, option),
@@ -46,29 +46,29 @@ export const LevelOverview = () => {
     },
   });
 
-  const [preloadedImages, setPreloadedImages] = useState<{
-    [key: string]: string;
-  }>({});
+  // const [preloadedImages, setPreloadedImages] = useState<{
+  //   [key: string]: string;
+  // }>({});
 
-  useEffect(() => {
-    const images = {
-      skeleton: skeleton,
-      skeletonBack: skeletonBack,
-    };
-    const loadImages = async () => {
-      const promises = Object.entries(images).map(([key, src]) =>
-        new Promise<HTMLImageElement>((resolve, reject) => {
-          const img = new Image();
-          img.src = src;
-          img.onload = () => resolve(img);
-          img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
-        }).then((img) => ({ [key]: img.src }))
-      );
-      const loadedImages = await Promise.all(promises);
-      setPreloadedImages(Object.assign({}, ...loadedImages));
-    };
-    loadImages();
-  }, []);
+  // useEffect(() => {
+  //   const images = {
+  //     skeleton: skeleton,
+  //     skeletonBack: skeletonBack,
+  //   };
+  //   const loadImages = async () => {
+  //     const promises = Object.entries(images).map(([key, src]) =>
+  //       new Promise<HTMLImageElement>((resolve, reject) => {
+  //         const img = new Image();
+  //         img.src = src;
+  //         img.onload = () => resolve(img);
+  //         img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
+  //       }).then((img) => ({ [key]: img.src }))
+  //     );
+  //     const loadedImages = await Promise.all(promises);
+  //     setPreloadedImages(Object.assign({}, ...loadedImages));
+  //   };
+  //   loadImages();
+  // }, []);
 
   return (
     <div className="flex flex-col w-full min-h-full pt-5 xs:pt-2">
