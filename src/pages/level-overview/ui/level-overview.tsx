@@ -82,7 +82,66 @@ export const LevelOverview = () => {
           </Button> */}
         </div>
       </div>
-      <div className="flex relative h-full">
+      <div className="flex-grow flex justify-center items-center relative w-full h-full overflow-visible -z-10">
+        <div className="absolute inset-0 flex justify-center items-center">
+          <div className="w-[434px] h-[434px] rounded-full bg-white/29 flex justify-center items-center">
+            <div className="w-[380px] h-[380px] rounded-full bg-white/35 flex justify-center items-center">
+              <div className="w-[330px] h-[330px] rounded-full bg-white"></div>
+            </div>
+          </div>
+        </div>
+
+        {/* <div className="relative z-10">
+          {option === "hand" && preloadedImages.skeleton && (
+            <>
+              <img
+                src={preloadedImages.skeleton}
+                alt=""
+                className="w-[285px] xs:w-[250px]"
+              />
+              <div className="bg-primary-blue p-2.5 absolute -translate-y-[120px] text-xs text-white rounded-full translate-x-20">
+                Руки {hero?.data.handLevel} lvl
+              </div>
+              <div className="-translate-y-4 translate-x-20 border-2 border-primary-blue w-[95px] xs:w-[65px] h-[164px] xs:h-[144px] absolute rounded-3xl bg-[#1877F2]/10"></div>
+              <div className=" -translate-x-20 xs:-translate-x-16 border-2 border-primary-blue w-[95px] xs:w-[65px] h-[179px] xs:h-[159px] absolute rounded-3xl bg-[#1877F2]/10"></div>
+            </>
+          )}
+          {option === "leg" && preloadedImages.skeleton && (
+            <>
+              <img
+                src={preloadedImages.skeleton}
+                alt=""
+                className="w-[285px] xs:w-[250px]"
+              />
+              <div className="bg-primary-blue p-2.5 absolute -translate-y-2 text-xs text-white rounded-full">
+                Ноги {hero?.data.legLevel} lvl
+              </div>
+              <div className="translate-y-24 xs:translate-y-20 border-2 border-primary-blue w-[150px] h-[165px] xs:w-[130px] xs:h-[145px] absolute rounded-3xl bg-[#1877F2]/10"></div>
+            </>
+          )}
+          {option === "back" && preloadedImages.skeletonBack && (
+            <>
+              <img
+                src={preloadedImages.skeletonBack}
+                alt=""
+                className="w-[320px] h-[320px] xs:w-[260px] xs:h-[260px]"
+              />
+              <div className="absolute -translate-y-10 xs:-translate-y-[40px] translate-x-12 xs:translate-x-[25px] w-[285px] h-[41px] xs:w-[215px] xs:h-[54px] rounded-[50%] bg-[#17283C] -z-10"></div>
+              <div className="bg-primary-blue p-2.5 absolute -translate-y-24 text-xs text-white rounded-full">
+                Спина {hero?.data.backLevel} lvl
+              </div>
+              <div className="translate-y-10 border-2 border-primary-blue w-[95px] h-[230px] xs:w-[80px] xs:h-[180px] absolute rounded-3xl bg-[#1877F2]/10"></div>
+            </>
+          )}
+          <img
+            src={character}
+            alt="Character"
+            className="w-[326px] h-[326px] xs:w-[280px] xs:h-[280px]"
+          />
+          <div className="absolute -translate-y-10 xs:-translate-y-[35px] translate-x-12 xs:translate-x-[60px] w-[215px] h-[41px] xs:w-[150px] rounded-[50%] bg-[#17283C] -z-10"></div>
+        </div> */}
+      </div>
+      {/* <div className="flex relative h-full">
         <div className="flex h-full items-center justify-center w-full transition-all duration-200">
           {option === "hand" && preloadedImages.skeleton && (
             <>
@@ -125,7 +184,7 @@ export const LevelOverview = () => {
             </>
           )}
         </div>
-      </div>
+      </div> */}
 
       <div className="mt-auto">
         <div className="flex justify-center">

@@ -15,7 +15,6 @@ import { LockIcon } from "@/assets/icons/lock";
 export const HomePage = () => {
   const navigate = useNavigate();
   const [width, setWidth] = useState<number>(0);
-  // const [seconds, setSeconds] = useState<number>(0);
   const queryClient = useQueryClient();
 
   const { initDataRaw } = retrieveLaunchParams();
@@ -66,17 +65,6 @@ export const HomePage = () => {
 
   return (
     <div className="flex flex-col w-full min-h-full pt-5 xs:pt-2">
-      {/* <div className="flex w-full justify-center">
-        {isExploding && (
-          <ConfettiExplosion
-            particleCount={500}
-            duration={3000}
-            width={1600}
-            zIndex={100}
-            onComplete={() => setIsExploding(false)}
-          />
-        )}
-      </div> */}
       <div className="flex flex-col w-full">
         <div className="flex w-full justify-between mb-4 xs:mb-2">
           <BalanceCard balance={user?.data.balance.points} />
@@ -111,7 +99,6 @@ export const HomePage = () => {
         </div>
       </div>
 
-      {/* Circle Block */}
       <div className="flex-grow flex justify-center items-center relative w-full h-full overflow-visible -z-10">
         <div className="absolute inset-0 flex justify-center items-center">
           <div className="w-[434px] h-[434px] rounded-full bg-white/29 flex justify-center items-center">
