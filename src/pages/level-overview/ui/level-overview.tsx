@@ -3,7 +3,7 @@ import { BalanceCard } from "@/shared/ui/balance-card.tsx";
 import { Button } from "@/shared/ui/button.tsx";
 import skeletonHands from "@/assets/skelet_hands.png";
 import skeletonLegs from "@/assets/skelet_legs.png";
-import skeletonBack from "@/assets/skelet-back.png";
+import skeletonBack from "@/assets/skelet_back.png";
 import { RadioGroup, RadioGroupItem } from "@/shared/ui/radio-group.tsx";
 import { Label } from "@/shared/ui/label.tsx";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
