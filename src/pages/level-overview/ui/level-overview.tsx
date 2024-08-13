@@ -111,7 +111,7 @@ export const LevelOverview = () => {
             <img
             src={preloadedImages.skeletonBack}
             alt=""
-            className="w-[285px] xs:w-[250px]"
+            className="w-[320px] xs:w-[250px]"
           />
           )}
         </div>
