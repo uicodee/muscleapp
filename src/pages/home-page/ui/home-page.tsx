@@ -57,7 +57,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      queryClient.invalidateQueries({ queryKey: ["farming"] });
+      void queryClient.invalidateQueries({ queryKey: ["farming"] });
     }, 1000);
 
     return () => clearInterval(intervalId);

@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BalanceCard } from "@/shared/ui/balance-card.tsx";
 import { Button } from "@/shared/ui/button.tsx";
-// import skeleton from "@/assets/skeleton.png";
-// import skeletonBack from "@/assets/back.png";
+import skeletonHands from "@/assets/skelet_hands.png";
+import skeletonLegs from "@/assets/skelet_legs.png";
+import skeletonBack from "@/assets/skelet-back.png";
 import { RadioGroup, RadioGroupItem } from "@/shared/ui/radio-group.tsx";
 import { Label } from "@/shared/ui/label.tsx";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -46,29 +47,30 @@ export const LevelOverview = () => {
     },
   });
 
-  // const [preloadedImages, setPreloadedImages] = useState<{
-  //   [key: string]: string;
-  // }>({});
+  const [preloadedImages, setPreloadedImages] = useState<{
+    [key: string]: string;
+  }>({});
 
-  // useEffect(() => {
-  //   const images = {
-  //     skeleton: skeleton,
-  //     skeletonBack: skeletonBack,
-  //   };
-  //   const loadImages = async () => {
-  //     const promises = Object.entries(images).map(([key, src]) =>
-  //       new Promise<HTMLImageElement>((resolve, reject) => {
-  //         const img = new Image();
-  //         img.src = src;
-  //         img.onload = () => resolve(img);
-  //         img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
-  //       }).then((img) => ({ [key]: img.src }))
-  //     );
-  //     const loadedImages = await Promise.all(promises);
-  //     setPreloadedImages(Object.assign({}, ...loadedImages));
-  //   };
-  //   loadImages();
-  // }, []);
+  useEffect(() => {
+    const images = {
+      skeletonHands: skeletonHands,
+      skeletonLegs: skeletonLegs,
+      skeletonBack: skeletonBack,
+    };
+    const loadImages = async () => {
+      const promises = Object.entries(images).map(([key, src]) =>
+        new Promise<HTMLImageElement>((resolve, reject) => {
+          const img = new Image();
+          img.src = src;
+          img.onload = () => resolve(img);
+          img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
+        }).then((img) => ({ [key]: img.src }))
+      );
+      const loadedImages = await Promise.all(promises);
+      setPreloadedImages(Object.assign({}, ...loadedImages));
+    };
+    loadImages();
+  }, []);
 
   return (
     <div className="flex flex-col w-full min-h-full pt-5 xs:pt-2">
@@ -89,6 +91,29 @@ export const LevelOverview = () => {
               <div className="w-[330px] h-[330px] rounded-full bg-white"></div>
             </div>
           </div>
+        </div>
+        <div className="relative z-10">
+          {option === "hand" && preloadedImages.skeletonHands &&  (
+            <img
+            src={preloadedImages.skeletonHands}
+            alt=""
+            className="w-[285px] xs:w-[250px]"
+          />
+          )}
+          {option === "leg" && preloadedImages.skeletonLegs &&  (
+            <img
+            src={preloadedImages.skeletonLegs}
+            alt=""
+            className="w-[285px] xs:w-[250px]"
+          />
+          )}
+          {option === "back" && preloadedImages.skeletonBack &&  (
+            <img
+            src={preloadedImages.skeletonBack}
+            alt=""
+            className="w-[285px] xs:w-[250px]"
+          />
+          )}
         </div>
 
         {/* <div className="relative z-10">
