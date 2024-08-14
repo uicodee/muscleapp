@@ -56,11 +56,12 @@ export const HomePage = () => {
   // }, [farming]);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      void queryClient.invalidateQueries({ queryKey: ["farming"] });
-    }, 1000);
-
-    return () => clearInterval(intervalId);
+    if (farming?.data.alreadyFarmed !== farming?.data.farmingSpeed) {
+      const intervalId = setInterval(() => {
+        void queryClient.invalidateQueries({ queryKey: ["farming"] });
+      }, 1000);
+      return () => clearInterval(intervalId);
+    }
   }, [farming]);
 
   return (
