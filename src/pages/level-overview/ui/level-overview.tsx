@@ -12,7 +12,7 @@ import {
   retrieveLaunchParams,
   useHapticFeedback,
 } from "@telegram-apps/sdk-react";
-// import HeroService from "@/shared/api/service/hero.ts";
+import HeroService from "@/shared/api/service/hero.ts";
 import EntityService from "@/shared/api/service/entity.ts";
 
 export const LevelOverview = () => {
@@ -24,10 +24,10 @@ export const LevelOverview = () => {
     queryKey: ["user"],
     queryFn: () => UserService.getUser(initDataRaw),
   });
-  // const { data: hero } = useQuery({
-  //   queryKey: ["hero"],
-  //   queryFn: () => HeroService.getHero(initDataRaw),
-  // });
+  const { data: hero } = useQuery({
+    queryKey: ["hero"],
+    queryFn: () => HeroService.getHero(initDataRaw),
+  });
   const { data: entity, isLoading } = useQuery({
     queryKey: ["entity", initDataRaw, option],
     queryFn: () => EntityService.getNextLevel(initDataRaw, option),
@@ -92,27 +92,42 @@ export const LevelOverview = () => {
             </div>
           </div>
         </div>
-        <div className="relative z-10">
-          {option === "hand" && preloadedImages.skeletonHands &&  (
-            <img
-            src={preloadedImages.skeletonHands}
-            alt=""
-            className="w-[285px] xs:w-[250px]"
-          />
+        <div className="relative z-10 transition-all duration-200">
+          {option === "hand" && preloadedImages.skeletonHands && (
+            <>
+              <img
+                src={preloadedImages.skeletonHands}
+                alt=""
+                className="w-[285px] xs:w-[250px]"
+              />
+              <div className="bg-primary-blue p-2.5 absolute -translate-y-[323px] translate-x-[177px] xs:-translate-y-[290px] text-xs text-white rounded-full xs:translate-x-[150px]">
+                Руки {hero?.data.handLevel} lvl
+              </div>
+            </>
           )}
-          {option === "leg" && preloadedImages.skeletonLegs &&  (
-            <img
-            src={preloadedImages.skeletonLegs}
-            alt=""
-            className="w-[285px] xs:w-[250px]"
-          />
+          {option === "leg" && preloadedImages.skeletonLegs && (
+            <>
+              <img
+                src={preloadedImages.skeletonLegs}
+                alt=""
+                className="w-[285px] xs:w-[250px]"
+              />
+              <div className="bg-primary-blue p-2.5 absolute translate-x-[100px] -translate-y-[215px] xs:translate-x-[83px] xs:-translate-y-[190px] text-xs text-white rounded-full">
+                Ноги {hero?.data.legLevel} lvl
+              </div>
+            </>
           )}
-          {option === "back" && preloadedImages.skeletonBack &&  (
-            <img
-            src={preloadedImages.skeletonBack}
-            alt=""
-            className="w-[320px] xs:w-[250px]"
-          />
+          {option === "back" && preloadedImages.skeletonBack && (
+            <>
+              <img
+                src={preloadedImages.skeletonBack}
+                alt=""
+                className="w-[320px] xs:w-[250px]"
+              />
+              <div className="bg-primary-blue p-2.5 absolute translate-x-[110px] -translate-y-[295px] xs:translate-x-[75px] xs:-translate-y-[240px] text-xs text-white rounded-full">
+                Спина {hero?.data.backLevel} lvl
+              </div>
+            </>
           )}
         </div>
 
