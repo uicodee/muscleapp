@@ -37,7 +37,8 @@
     "start_farming": "Начать фарминг",
     "boost_game": "Boost-game",
     "claim": "Клейм",
-    "warning_about_pumping": "сначала прокачай руки в разделе прокачка"
+    "warning_about_pumping": "сначала прокачай руки в разделе прокачка",
+    "farming": "Фарминг"
   },
   "pumping": {
     "description_for_hands": "Мышцы рук отвечают за прокачку скорости клейминга",

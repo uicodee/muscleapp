@@ -1,4 +1,4 @@
-export function formatTime(totalSeconds: number): string {
+export function formatTime(text: string, totalSeconds: number): string {
   // Calculate remaining seconds
 
   // Ensure remaining time is not negative
@@ -15,5 +15,5 @@ export function formatTime(totalSeconds: number): string {
   const formattedSeconds = String(remainingSeconds).padStart(2, "0");
 
   // Return the formatted string
-  return `Осталось: ${formattedHours}h ${formattedMinutes}m ${formattedSeconds}s`;
+  return `${text} ${formattedHours}h ${formattedMinutes}m ${formattedSeconds}s`;
 }

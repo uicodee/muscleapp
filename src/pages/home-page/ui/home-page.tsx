@@ -129,7 +129,10 @@ export const HomePage = () => {
         {hero?.data.handLevel !== 0 &&
           farming?.data.farmingSpeed !== farming?.data.alreadyFarmed && (
             <div className="flex w-full justify-center font-base text-primary-gray leading-6 text-center text-xs">
-              {formatTime(farming?.data.leftToClaim as number)}
+              {formatTime(
+                t("main.timer_remained"),
+                farming?.data.leftToClaim as number
+              )}
             </div>
           )}
         <div className="flex w-full flex-col gap-y-3 xs:gap-y-1 text-lg ">
@@ -168,8 +171,8 @@ export const HomePage = () => {
                 ></div>
                 <div className="relative z-10 text-white text-center text-base xs:text-sm leading-9">
                   <p className="leading-9">
-                    Фарминг $MUSCLE {farming?.data.alreadyFarmed} /{" "}
-                    {farming?.data.farmingSpeed}
+                    {t("main.farming")} {t("common.name_token")}{" "}
+                    {farming?.data.alreadyFarmed} / {farming?.data.farmingSpeed}
                   </p>
                 </div>
               </div>

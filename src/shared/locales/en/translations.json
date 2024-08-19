@@ -37,7 +37,8 @@
     "start_farming": "Start farming",
     "boost_game": "Boost-game",
     "claim": "Claim",
-    "warning_about_upgrade": "first, pump your hands in the upgrade section"
+    "warning_about_upgrade": "first, pump your hands in the upgrade section",
+    "farming": "Farming"
   },
   "pumping": {
     "description_for_hands": "The muscles of the arms are responsible for pumping the speed of branding",
