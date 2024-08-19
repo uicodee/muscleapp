@@ -11,8 +11,10 @@ import { useEffect, useState } from "react";
 import character from "@/assets/body.png";
 import { formatTime } from "@/shared/data/helpers";
 import { LockIcon } from "@/assets/icons/lock";
+import { useTranslation } from "react-i18next";
 
 export const HomePage = () => {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [width, setWidth] = useState<number>(0);
   const queryClient = useQueryClient();
@@ -24,7 +26,11 @@ export const HomePage = () => {
   });
   const { data: user } = useQuery({
     queryKey: ["user"],
-    queryFn: () => UserService.getUser(initDataRaw),
+    queryFn: () =>
+      UserService.getUser(initDataRaw).then((res) => {
+        void i18n.changeLanguage(res.data.language);
+        return res;
+      }),
   });
   const { data: farming } = useQuery({
     queryKey: ["farming"],
@@ -81,21 +87,21 @@ export const HomePage = () => {
             variant="chip"
             size="chip"
           >
-            Руки {hero?.data.handLevel} lvl
+            {t("common.hands")} {hero?.data.handLevel} lvl
           </Button>
           <Button
             className="px-4 py-3 xs:px-1 xs:py-1 xs:text-sm"
             variant="chip"
             size="chip"
           >
-            Спина {hero?.data.backLevel} lvl
+            {t("common.back")} {hero?.data.backLevel} lvl
           </Button>
           <Button
             className="px-4 py-3 xs:px-1 xs:py-1 xs:text-sm"
             variant="chip"
             size="chip"
           >
-            Ноги {hero?.data.legLevel} lvl
+            {t("common.legs")} {hero?.data.legLevel} lvl
           </Button>
         </div>
       </div>
@@ -152,7 +158,7 @@ export const HomePage = () => {
                   //   });
                 }}
               >
-                Клейм
+                {t("main.claim")}
               </Button>
             ) : (
               <div className="relative w-full py-3 xs:py-1 bg-primary-blue/65 rounded-lg overflow-hidden">
@@ -170,7 +176,7 @@ export const HomePage = () => {
             )
           ) : (
             <Button className="w-full font-bold gap-x-2 py-3 xs:text-base xs:py-1 xs:leading-9 leading-9">
-              Начать фарминг
+              {t("main.start_farming")}
               <LockIcon />
             </Button>
           )}
@@ -178,7 +184,7 @@ export const HomePage = () => {
             variant="orange"
             className="font-bold gap-x-2 py-3 xs:py-1 xs:text-base xs:leading-9 leading-9"
           >
-            Boost-game
+            {t("main.boost_game")}
             <div className="bg-primary-blue px-2.5 py-2 xs:text-xs xs:px-2 xs:py-1 rounded-full text-sm font-normal rotate-8">
               soon
             </div>

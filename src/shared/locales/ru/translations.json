@@ -1,0 +1,67 @@
+{
+  "languages": {
+    "russian": "Русский",
+    "english": "English"
+  },
+  "common": {
+    "name_token": "$MUSCLE",
+    "hands": "Руки",
+    "back": "Спина",
+    "legs": "Ноги",
+    "start": "Начать",
+    "you_got_it": "Вы получили"
+  },
+  "menu": {
+    "main": "Главная",
+    "pumping": "Прокачка",
+    "tasks": "Задания",
+    "friends": "Друзья"
+  },
+  "screensaver": {
+    "skip": "Пропустить",
+    "screen1": {
+      "title": "Качай персонажа",
+      "description": "Руки ноги и спину"
+    },
+    "screen2": {
+      "title": "Зарабатывай токены",
+      "description": "$MUSCLE"
+    },
+    "screen3": {
+      "title": "Зови друзей",
+      "description": "Получай токены"
+    }
+  },
+  "main": {
+    "timer_remained": "Осталось:",
+    "start_farming": "Начать фарминг",
+    "boost_game": "Boost-game",
+    "claim": "Клейм",
+    "warning_about_pumping": "сначала прокачай руки в разделе прокачка"
+  },
+  "pumping": {
+    "description_for_hands": "Мышцы рук отвечают за прокачку скорости клейминга",
+    "description_for_legs": "Мышцы ног отвечают за время, которое можно провести в буст-игре",
+    "description_for_back": "Мышцы спины отвечают за возможность прокачки мышц рук и ног",
+    "to_next_level": "$MUSCL до следующего уровня",
+    "upgrade": "Прокачать",
+    "hint": "Прокачивай руки, ноги и спину, чтобы твой персонаж был сильным и был готов к следующему этапу игры",
+    "maximal_level": "Максимальный уровень"
+  },
+  "tasks": {
+    "title": "Задания",
+    "description": "Выполняйте задания, чтобы получить $MUSCLE"
+  },
+  "friends": {
+    "title": "Приглашай",
+    "description": "Приглашайте друзей, чтобы заработать $MUSCLE",
+    "invite_friend": "Пригласить друга",
+    "referrals": "Referrals",
+    "tokens": "Tokens"
+  },
+  "settings": {
+    "title": "Настройки",
+    "change_language": "Сменить язык",
+    "connect_ton_wallet": "подключить ton кошелёк"
+  }
+}

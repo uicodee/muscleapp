@@ -11,16 +11,27 @@
 // }
 
 export interface Balance {
-    id: number;
-    userId: number;
-    points: string
+  id: number;
+  userId: number;
+  points: string;
 }
 
-
 export interface User {
-    tgId: number;
-    id: number;
-    username: string;
-    walletAddress: string;
-    balance: Balance
+  tgId: number;
+  id: number;
+  language: string;
+  username: string;
+  walletAddress: string;
+  balance: Balance;
+}
+
+export interface Referral {
+  id: number;
+  points: number;
+  username: string;
+}
+
+export interface Referrals {
+  totalPoints: number;
+  referrals: Referral[];
 }

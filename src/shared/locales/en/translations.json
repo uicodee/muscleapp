@@ -1,0 +1,67 @@
+{
+  "languages": {
+    "russian": "Русский",
+    "english": "English"
+  },
+  "common": {
+    "name_token": "$MUSCLE",
+    "hands": "Hands",
+    "back": "Back",
+    "legs": "Legs",
+    "start": "Start",
+    "you_got_it": "You have"
+  },
+  "menu": {
+    "main": "Main",
+    "upgrade": "Upgrade",
+    "tasks": "Tasks",
+    "friends": "Friends"
+  },
+  "screensaver": {
+    "skip": "Skip",
+    "screen1": {
+      "title": "Upgrade your character",
+      "description": "Arms legs and back"
+    },
+    "screen2": {
+      "title": "Earn tokens",
+      "description": "$MUSCLE"
+    },
+    "screen3": {
+      "title": "Call your friends",
+      "description": "Get tokens"
+    }
+  },
+  "main": {
+    "timer_remained": "Left:",
+    "start_farming": "Start farming",
+    "boost_game": "Boost-game",
+    "claim": "Claim",
+    "warning_about_upgrade": "first, pump your hands in the upgrade section"
+  },
+  "pumping": {
+    "description_for_hands": "The muscles of the arms are responsible for pumping the speed of branding",
+    "description_for_legs": "The leg muscles are responsible for the time that can be spent in the boost game",
+    "description_for_back": "The muscles of the back are responsible for the ability to pump the muscles of the arms and legs",
+    "to_next_level": "$MUSCL to the next level",
+    "upgrade": "Upgrade",
+    "hint": "You've got to pump up your arms, legs and back so that your character is strong and ready for the next stage of the game",
+    "maximal_level": "Maximal level"
+  },
+  "tasks": {
+    "title": "Tasks",
+    "description": "Complete tasks to get $MUSCLE"
+  },
+  "friends": {
+    "title": "Invite",
+    "description": "Invite your friends to earn $MUSCLE",
+    "invite_friend": "Invite a friend",
+    "referrals": "Referrals",
+    "tokens": "Tokens"
+  },
+  "settings": {
+    "title": "Settings",
+    "change_language": "Change the language",
+    "connect_ton_wallet": "Connect your TON wallet"
+  }
+}

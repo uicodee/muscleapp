@@ -14,8 +14,10 @@ import {
 } from "@telegram-apps/sdk-react";
 import HeroService from "@/shared/api/service/hero.ts";
 import EntityService from "@/shared/api/service/entity.ts";
+import { useTranslation } from "react-i18next";
 
 export const LevelOverview = () => {
+  const { t } = useTranslation();
   const haptic = useHapticFeedback();
   const { initDataRaw } = retrieveLaunchParams();
   const [option, setOption] = useState<string>("hand");
@@ -101,7 +103,7 @@ export const LevelOverview = () => {
                 className="w-[285px] xs:w-[250px]"
               />
               <div className="bg-primary-blue p-2.5 absolute -translate-y-[323px] translate-x-[177px] xs:-translate-y-[290px] text-xs text-white rounded-full xs:translate-x-[150px]">
-                Руки {hero?.data.handLevel} lvl
+                {t("common.hands")} {hero?.data.handLevel} lvl
               </div>
             </>
           )}
@@ -113,7 +115,7 @@ export const LevelOverview = () => {
                 className="w-[285px] xs:w-[250px]"
               />
               <div className="bg-primary-blue p-2.5 absolute translate-x-[100px] -translate-y-[215px] xs:translate-x-[83px] xs:-translate-y-[190px] text-xs text-white rounded-full">
-                Ноги {hero?.data.legLevel} lvl
+                {t("common.legs")} {hero?.data.legLevel} lvl
               </div>
             </>
           )}
@@ -125,7 +127,7 @@ export const LevelOverview = () => {
                 className="w-[320px] xs:w-[250px]"
               />
               <div className="bg-primary-blue p-2.5 absolute translate-x-[110px] -translate-y-[295px] xs:translate-x-[75px] xs:-translate-y-[240px] text-xs text-white rounded-full">
-                Спина {hero?.data.backLevel} lvl
+                {t("common.back")} {hero?.data.backLevel} lvl
               </div>
             </>
           )}
@@ -231,8 +233,8 @@ export const LevelOverview = () => {
           <div className="flex w-80 xs:w-60 justify-center text-white text-center bg-primary-blue p-2.5 xs:p-2 rounded-full text-xs mb-1 mt-3 xs:mt-1">
             <p className="flex text-center">
               {entity?.data !== null && isLoading !== true
-                ? `${entity?.data.price} $MUSCLE до следующего уровня`
-                : "Максимальный уровень"}
+                ? `${entity?.data.price} ${t("pumping.to_next_level")}`
+                : t("pumping.maximal_level")}
             </p>
           </div>
         </div>
@@ -251,7 +253,7 @@ export const LevelOverview = () => {
                 htmlFor="hand"
                 className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-2.5 xs:py-1 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
               >
-                Руки
+                {t("common.hands")}
               </Label>
             </div>
             <div>
@@ -260,7 +262,7 @@ export const LevelOverview = () => {
                 htmlFor="leg"
                 className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-2.5 xs:py-1 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
               >
-                Ноги
+                {t("common.legs")}
               </Label>
             </div>
             <div>
@@ -269,7 +271,7 @@ export const LevelOverview = () => {
                 htmlFor="back"
                 className="flex text-lg flex-col text-primary-blue items-center justify-between rounded-lg border-2 border-muted bg-popover px-2.5 py-3 xs:px-2.5 xs:py-1 xs:text-sm peer-data-[state=checked]:border-primary-blue [&:has([data-state=checked])]:border-primary"
               >
-                Спина
+                {t("common.back")}
               </Label>
             </div>
           </RadioGroup>
@@ -280,7 +282,7 @@ export const LevelOverview = () => {
             className="w-full font-bold gap-x-2 py-3 xs:py-1 xs:text-base xs:leading-9 leading-9"
             onClick={() => mutation.mutate()}
           >
-            Прокачать
+            {t("pumping.upgrade")}
           </Button>
         </div>
       </div>
