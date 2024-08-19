@@ -4,7 +4,7 @@ import { CopyIcon } from "@/assets/icons/copy.tsx";
 import { useTranslation } from "react-i18next";
 
 interface BringCardProps {
-  balance: string;
+  balance: number;
 }
 
 export const BringCard = ({ balance }: BringCardProps) => {

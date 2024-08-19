@@ -10,10 +10,6 @@ import { Referral } from "@/shared/api/models/user";
 export const FriendsOverview = () => {
   const { t } = useTranslation();
   const { initDataRaw } = retrieveLaunchParams();
-  const { data: user } = useQuery({
-    queryKey: ["user"],
-    queryFn: () => UserService.getUser(initDataRaw),
-  });
   const { data, isLoading } = useQuery({
     queryKey: ["referrals"],
     queryFn: () => UserService.getReferrals(initDataRaw),
@@ -22,7 +18,7 @@ export const FriendsOverview = () => {
     !isLoading && (
       <div className="mt-20">
         <Heading className="text-center">{t("friends.title")}</Heading>
-        <BringCard balance={user?.data.balance.points as string} />
+        <BringCard balance={data?.data.totalPoints as number} />
         <LeaderboardCard
           referralsCount={data?.data.referrals.length as number}
           referrals={data?.data.referrals as Referral[]}
