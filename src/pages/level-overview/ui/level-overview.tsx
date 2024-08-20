@@ -105,6 +105,9 @@ export const LevelOverview = () => {
               <div className="bg-primary-blue p-2.5 absolute -translate-y-[323px] translate-x-[177px] xs:-translate-y-[290px] text-xs text-white rounded-full xs:translate-x-[150px]">
                 {t("common.hands")} {hero?.data.handLevel} lvl
               </div>
+              <div className="absolute bg-primary-blue text-white rounded-lg w-[105px] text-xs px-1.5 py-2 translate-x-[170px] -translate-y-[120px] xs:translate-x-[130px] xs:-translate-y-[105px]">
+                {t("pumping.description_for_hands")}
+              </div>
             </>
           )}
           {option === "leg" && preloadedImages.skeletonLegs && (
@@ -117,6 +120,9 @@ export const LevelOverview = () => {
               <div className="bg-primary-blue p-2.5 absolute translate-x-[100px] -translate-y-[215px] xs:translate-x-[83px] xs:-translate-y-[190px] text-xs text-white rounded-full">
                 {t("common.legs")} {hero?.data.legLevel} lvl
               </div>
+              <div className="absolute bg-primary-blue text-white rounded-lg w-[105px] text-xs px-1.5 py-2 translate-x-[215px] -translate-y-[172px] xs:translate-x-[190px] xs:-translate-y-[151px]">
+                {t("pumping.description_for_legs")}
+              </div>
             </>
           )}
           {option === "back" && preloadedImages.skeletonBack && (
@@ -128,6 +134,9 @@ export const LevelOverview = () => {
               />
               <div className="bg-primary-blue p-2.5 absolute translate-x-[110px] -translate-y-[295px] xs:translate-x-[75px] xs:-translate-y-[240px] text-xs text-white rounded-full">
                 {t("common.back")} {hero?.data.backLevel} lvl
+              </div>
+              <div className="absolute bg-primary-blue text-white rounded-lg w-[105px] text-xs px-1.5 py-2 translate-x-[240px] -translate-y-[200px] xs:translate-x-[190px] xs:-translate-y-[195px]">
+                {t("pumping.description_for_back")}
               </div>
             </>
           )}

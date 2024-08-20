@@ -19,6 +19,17 @@ export default class UserService {
     });
   }
 
+  static async updateLanguage(
+    initData: string | undefined,
+    language: string
+  ): Promise<AxiosResponse<User>> {
+    return api.patch<User>(
+      "/api/user",
+      { language: language },
+      { headers: { Authorization: `Bearer ${initData}` } }
+    );
+  }
+
   // static async getCashes(): Promise<AxiosResponse<Cash[]>> {
   //     return api.get<[]>("/cash/all")
   // }
