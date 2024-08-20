@@ -3,7 +3,7 @@ import { cn } from "@/shared/ui/utils.ts";
 
 interface TaskCardProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const PrimaryCard = ({
