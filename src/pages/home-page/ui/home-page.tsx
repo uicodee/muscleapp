@@ -14,7 +14,7 @@ import { LockIcon } from "@/assets/icons/lock";
 import { useTranslation } from "react-i18next";
 
 export const HomePage = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [width, setWidth] = useState<number>(0);
   const queryClient = useQueryClient();
@@ -26,11 +26,7 @@ export const HomePage = () => {
   });
   const { data: user } = useQuery({
     queryKey: ["user"],
-    queryFn: () =>
-      UserService.getUser(initDataRaw).then((res) => {
-        void i18n.changeLanguage(res.data.language);
-        return res;
-      }),
+    queryFn: () => UserService.getUser(initDataRaw),
   });
   const { data: farming } = useQuery({
     queryKey: ["farming"],

@@ -3,11 +3,23 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { tabs } from "@/shared/data/constants.tsx";
 import { Suspense } from "react";
 import { useTranslation } from "react-i18next";
+import { retrieveLaunchParams } from "@telegram-apps/sdk-react";
+import { useQuery } from "@tanstack/react-query";
+import UserService from "@/shared/api/service/user";
 
 export const RootPage = () => {
-  const { t } = useTranslation();
+  const { initDataRaw } = retrieveLaunchParams();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const navigate = useNavigate();
+  const { data: _ } = useQuery({
+    queryKey: ["user"],
+    queryFn: () =>
+      UserService.getUser(initDataRaw).then((res) => {
+        void i18n.changeLanguage(res.data.language);
+        return res;
+      }),
+  });
   return (
     <div className="flex flex-col h-lvh">
       <div style={{ flex: 1 }} className="overflow-y-auto px-4 pb-24">
